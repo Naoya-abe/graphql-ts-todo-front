@@ -29,6 +29,8 @@ type Props = {
 
 const Home: NextPage<Props> = (props) => {
   const { todos } = props;
+  console.log(todos);
+
   return (
     <>
       <Head>
