@@ -1,9 +1,7 @@
 import Head from 'next/head';
-import { Inter } from 'next/font/google';
 import styles from '@/styles/Home.module.css';
 import { GetServerSideProps, NextPage } from 'next';
 import { urqlClient } from '@/libs/urql';
-import { gql } from 'urql';
 import {
   Table,
   TableCaption,
@@ -14,22 +12,14 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-
-const inter = Inter({ subsets: ['latin'] });
+import { GetTodosDocument, TodoModel } from '@/graphql/generated/graphql';
 
 type Props = {
-  todos: {
-    id: string;
-    title: string;
-    detail: string;
-    createdAt: string;
-    updatedAt: string;
-  }[];
+  todos: TodoModel[];
 };
 
 const Home: NextPage<Props> = (props) => {
   const { todos } = props;
-  console.log(todos);
 
   return (
     <>
@@ -73,19 +63,12 @@ const Home: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   try {
     const client = await urqlClient();
-    const todosQuery = gql`
-      query GetTodos {
-        getTodos {
-          id
-          title
-          detail
-          createdAt
-          updatedAt
-        }
-      }
-    `;
-    const result = await client.query(todosQuery, {}).toPromise();
-    return { props: { todos: result.data.getTodos } };
+    const result = await client.query(GetTodosDocument, {}).toPromise();
+    if (result.data) {
+      return { props: { todos: result.data.getTodos } };
+    } else {
+      return { props: { todos: [] } };
+    }
   } catch (error) {
     console.error(error);
     return {

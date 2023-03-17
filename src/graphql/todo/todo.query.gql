@@ -1,0 +1,9 @@
+query GetTodos {
+  getTodos {
+    id
+    title
+    detail
+    createdAt
+    updatedAt
+  }
+}
