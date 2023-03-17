@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import styles from '@/styles/Home.module.css';
 import { GetServerSideProps, NextPage } from 'next';
 import { urqlClient } from '@/libs/urql';
 import {
@@ -13,6 +12,7 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import { GetTodosDocument, TodoModel } from '@/graphql/generated/graphql';
+import Header from '@/components/header';
 
 type Props = {
   todos: TodoModel[];
@@ -29,7 +29,8 @@ const Home: NextPage<Props> = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main>
+        <Header />
         <TableContainer>
           <Table variant="striped" colorScheme="teal">
             <TableCaption>Todo List</TableCaption>
