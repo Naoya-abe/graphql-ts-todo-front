@@ -13,12 +13,14 @@ import {
   Input,
   Text,
   Textarea,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { createTodoSchema, CreateTodoSchema } from '@/types/create';
 import { urqlClient } from '@/libs/urql';
 
 const CreateTodo: NextPage = () => {
+  const toast = useToast();
   const {
     register,
     handleSubmit,
@@ -32,6 +34,14 @@ const CreateTodo: NextPage = () => {
       const variables = { title: data.title, detail: data.detail };
       await client.mutation(CreateTodoDocument, variables).toPromise();
       reset();
+      toast({
+        title: 'Todo Created',
+        description: 'Todo was created in the database.',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      });
     } catch (error) {
       console.error(error);
     }
