@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { CreateTodoDocument } from '@/graphql/generated/graphql';
-import { useMutation } from 'urql';
+
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -48,7 +48,7 @@ const CreateTodo: NextPage = () => {
   };
 
   return (
-    <Center h="calc(100vh - 60px)">
+    <Center h="calc(50vh - 60px)">
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack w={['80vw', '70vw', '50vw']} spacing={3}>
           <FormControl isInvalid={!!errors.title}>
