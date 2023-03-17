@@ -30,7 +30,6 @@ const Home: NextPage<Props> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Header />
         <TableContainer>
           <Table variant="striped" colorScheme="teal">
             <TableCaption>Todo List</TableCaption>

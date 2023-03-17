@@ -48,7 +48,7 @@ const CreateTodo: NextPage = () => {
   };
 
   return (
-    <Center h="100vh">
+    <Center h="calc(100vh - 60px)">
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack w={['80vw', '70vw', '50vw']} spacing={3}>
           <FormControl isInvalid={!!errors.title}>
@@ -79,7 +79,7 @@ const CreateTodo: NextPage = () => {
           </FormControl>
           <Flex w="100%" justify="flex-end">
             <Button
-              colorScheme="blue"
+              colorScheme="teal"
               type="submit"
               isLoading={isSubmitting}
               loadingText="Submitting"
